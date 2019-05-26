@@ -2,7 +2,6 @@ package intSortedList;
 
 import auxiliary.ListException;
 import auxiliary.Terminal;
-import intList.IntList;
 
 public class TIntSortedList {
 

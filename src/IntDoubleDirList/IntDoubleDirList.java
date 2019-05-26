@@ -1,24 +1,25 @@
-package intList;
+package IntDoubleDirList;
 
 import auxiliary.ListException;
 
-public class IntList {
+public class IntDoubleDirList {
 
     private class IntListElement {
+        private IntListElement prev;
         private int info;
         private IntListElement next;
 
-        IntListElement(int info, IntListElement next) {
+        IntListElement(IntListElement prev, int info, IntListElement next) {
+            this.prev = prev;
             this.info = info;
             this.next = next;
         }
-
     }
 
     private IntListElement first;
     private IntListElement last;
 
-    public IntList() {
+    IntDoubleDirList() {
         first = null;
         last = null;
     }
@@ -28,21 +29,37 @@ public class IntList {
     }
 
     void insertFirst(int newValue) {
-        first = new IntListElement(newValue, first);
-        if (last == null) last = first;
+        IntListElement newElem = new IntListElement(null, newValue, first);
+        if (first == null) {
+            first = newElem;
+            last = newElem;
+        } else {
+            first.prev = newElem;
+            first = newElem;
+        }
+
     }
 
     void insertLast(int newValue) {
-        if (isEmpty())
-            insertFirst(newValue);
-        else
-            last = (last.next = new IntListElement(newValue, null));
+        IntListElement newElem = new IntListElement(last, newValue, null);
+        if (first == null) {
+            first = newElem;
+            last = newElem;
+        } else {
+            last.next = newElem;
+            last = newElem;
+        }
     }
 
     void deleteFirst() {
         if (isEmpty()) throw new ListException();
-        first = first.next;
-        if (first == null) last = null;
+        if (first == last) {
+            first = null;
+            last = null;
+        } else {
+            first.next.prev = null;
+            first = first.next;
+        }
     }
 
     void deleteLast() {
@@ -50,15 +67,10 @@ public class IntList {
         if (first == last) {
             first = null;
             last = null;
-            return;
+        } else {
+            last.prev.next = null;
+            last = last.prev;
         }
-        IntListElement prev = first;
-        while (prev.next != last) {
-            prev = prev.next;
-        }
-        last = prev;
-        last.next = null;
-
     }
 
     int firstElement() {
@@ -79,12 +91,12 @@ public class IntList {
     }
 
     public boolean equals(Object obj) {
-        if (!(obj instanceof IntList)) return false;
-        IntList anotherIntList = (IntList) obj;
-        if (size() != anotherIntList.size()) return false;
+        if (!(obj instanceof IntDoubleDirList)) return false;
+        IntDoubleDirList anotherIntDoubleDirList = (IntDoubleDirList) obj;
+        if (size() != anotherIntDoubleDirList.size()) return false;
 
         IntListElement elem = first;
-        IntListElement anotherElem = anotherIntList.first;
+        IntListElement anotherElem = anotherIntDoubleDirList.first;
         while (elem != null) {
             if (elem.info != anotherElem.info) return false;
             elem = elem.next;

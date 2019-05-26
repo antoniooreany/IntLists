@@ -1,4 +1,4 @@
-package intList;
+package IntDoubleDirList;
 
 import auxiliary.ListException;
 import auxiliary.Terminal;
@@ -7,7 +7,7 @@ public class TIntList {
 
 	public static void main(String[] args) {
 
-		IntList l = new IntList();
+		IntDoubleDirList l = new IntDoubleDirList();
 		boolean terminate = false;
 
 		while (!terminate) {
