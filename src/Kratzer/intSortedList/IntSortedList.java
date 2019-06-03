@@ -1,6 +1,4 @@
-package Kratzer.IntSortedList;
-
-import Kratzer.ListException;
+package Kratzer.intSortedList;
 
 public class IntSortedList {
 
@@ -42,10 +40,47 @@ public class IntSortedList {
 			 backfrog = frog, frog = frog.next);
 		
 		// insert
+		if (backfrog != null) {
+			backfrog.next = new ListElement(newValue, frog);
+			if (frog == null) 
+				last = backfrog.next;
+		} else {
+			first = new ListElement(newValue, first);
+			if (last == null)
+				last = first;
+		}
 	}
 		
 	public void delete(int value) {
-	}
+		
+		if (isEmpty()) throw new ListException();
+		
+		// find insertion point
+		ListElement frog;
+		ListElement backfrog;
+		
+		for (frog = first, backfrog = null; 
+			 frog != null && frog.info < value; 
+			 backfrog = frog, frog = frog.next);
+		
+		// Have we found a value to kill?
+		if (frog == null || frog.info != value)
+			return;
+		
+		// Kill the value // TODO For sure: frog.info == value
+//		while (frog != null && frog.info == value) { // All the elements with info = value are deleted.
+			if (backfrog != null) {
+				backfrog.next = frog.next;
+				if (backfrog.next == null)
+					last = backfrog;
+			} else {
+				first = first.next;
+				if (first == null)
+					last = null;
+			}
+			frog = frog.next;
+		}
+//	}
 	
 	public int firstElement() {
 		if (isEmpty()) throw new ListException();

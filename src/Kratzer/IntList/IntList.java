@@ -1,6 +1,6 @@
 package Kratzer.IntList;
 
-import Kratzer.ListException;
+import Kratzer.intSortedList.ListException;
 
 public class IntList {
 

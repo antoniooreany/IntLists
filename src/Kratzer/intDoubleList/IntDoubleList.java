@@ -1,6 +1,6 @@
 package Kratzer.intDoubleList;
 
-import Kratzer.ListException;
+import Kratzer.intSortedList.ListException;
 
 public class IntDoubleList {
 

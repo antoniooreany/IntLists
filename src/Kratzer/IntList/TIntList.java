@@ -1,6 +1,6 @@
 package Kratzer.IntList;
 
-import Kratzer.ListException;
+import Kratzer.intSortedList.ListException;
 import Kratzer.Terminal;
 
 public class TIntList {

@@ -1,4 +1,4 @@
-package Kratzer;
+package Kratzer.intSortedList;
 
 public class ListException extends RuntimeException {
 
